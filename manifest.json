@@ -3,7 +3,7 @@
 	"name": "Timeline Canvas Creator",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Quickly create timeline structured canvases in Obsidian.",
+	"description": "Quickly create timeline structured canvases.",
 	"author": "chris-codes1",
 	"authorUrl": "https://github.com/chris-codes1",
 	"fundingUrl": "https://buymeacoffee.com/chrisiscool",

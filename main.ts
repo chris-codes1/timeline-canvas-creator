@@ -2,9 +2,9 @@ import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Set
 
 // Remember to rename these classes and interfaces!
 
-interface TimelineCanvasPluginSettings {
-	mySetting: string;
-}
+// interface TimelineCanvasPluginSettings {
+// 	mySetting: string;
+// }
 
 interface CanvasNode {
 	id: string;
@@ -24,15 +24,15 @@ const canvasData: {
 	edges: [],
 };
 
-const DEFAULT_SETTINGS: TimelineCanvasPluginSettings = {
-	mySetting: 'default'
-}
+// const DEFAULT_SETTINGS: TimelineCanvasPluginSettings = {
+// 	mySetting: 'default'
+// }
 
 export default class TimelineCanvasPlugin extends Plugin {
-	settings: TimelineCanvasPluginSettings;
+	// settings: TimelineCanvasPluginSettings;
 
 	async onload() {
-		await this.loadSettings();
+		// await this.loadSettings();
 
 
 		// This creates an icon in the left ribbon.
@@ -56,10 +56,6 @@ export default class TimelineCanvasPlugin extends Plugin {
 			callback: () => {
 				new CreateTimelineModal(this.app, (startYear: number, endYear: number, interval: number) => {
 					//console.log ("Start Year:", startYear, "End Year:", endYear, "Interval:", interval);
-					
-					for (let year = startYear; year <= endYear; year += interval) {
-						//console.log(year)
-					}
 
 					let x = 0;
 					const y = 0;
@@ -147,13 +143,13 @@ export default class TimelineCanvasPlugin extends Plugin {
 
 	}
 
-	async loadSettings() {
-		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
-	}
+	// async loadSettings() {
+	// 	this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+	// }
 
-	async saveSettings() {
-		await this.saveData(this.settings);
-	}
+	// async saveSettings() {
+	// 	await this.saveData(this.settings);
+	// }
 }
 
 class CreateTimelineModal extends Modal {

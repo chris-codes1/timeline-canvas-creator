@@ -2,7 +2,7 @@ import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Set
 
 // Remember to rename these classes and interfaces!
 
-interface MyPluginSettings {
+interface TimelineCanvasPluginSettings {
 	mySetting: string;
 }
 
@@ -24,12 +24,12 @@ const canvasData: {
 	edges: [],
 };
 
-const DEFAULT_SETTINGS: MyPluginSettings = {
+const DEFAULT_SETTINGS: TimelineCanvasPluginSettings = {
 	mySetting: 'default'
 }
 
 export default class TimelineCanvasPlugin extends Plugin {
-	settings: MyPluginSettings;
+	settings: TimelineCanvasPluginSettings;
 
 	async onload() {
 		await this.loadSettings();

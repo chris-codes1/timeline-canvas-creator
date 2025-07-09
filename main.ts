@@ -1,4 +1,5 @@
 import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Setting, TFile } from 'obsidian';
+import { CanvasNodeData, CanvasData, CanvasTextData  } from "obsidian/canvas";
 
 // Remember to rename these classes and interfaces!
 
@@ -6,22 +7,9 @@ import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Set
 // 	mySetting: string;
 // }
 
-interface CanvasNode {
-	id: string;
-	type: string;
-	text: string;
-	x: number;
-	y: number;
-	width: number;
-	height: number;
-}
-
-const canvasData: {
-	nodes: CanvasNode[];
-	edges: any[]; // or define a proper type for edges if needed
-} = {
-	nodes: [],
-	edges: [],
+const CanvasTimelineData: CanvasData = {
+    nodes: [],
+    edges: [],
 };
 
 // const DEFAULT_SETTINGS: TimelineCanvasPluginSettings = {
@@ -52,7 +40,7 @@ export default class TimelineCanvasPlugin extends Plugin {
 		// This adds a simple command that can be triggered anywhere
 		this.addCommand({
 			id: 'create-timeline-canvas',
-			name: 'Create timeline canvas',
+			name: 'Create timeline Canvas',
 			callback: () => {
 				new CreateTimelineModal(this.app, (startYear: number, endYear: number, interval: number) => {
 					//console.log ("Start Year:", startYear, "End Year:", endYear, "Interval:", interval);
@@ -62,16 +50,16 @@ export default class TimelineCanvasPlugin extends Plugin {
 					const spacing = 100; // Distance between nodes horizontally
 					
 					for (let year = startYear; year <= endYear; year += interval) {
-						const node: CanvasNode = {
+						const node: CanvasNodeData = {
 							id: crypto.randomUUID(), // Generates a unique ID for each node
-							type: "text",
-							text: year.toString(),
 							x: x,
 							y: y,
 							width: 100,
 							height: 50,
+							type: "text",
+							text: year.toString(),
 						};
-						canvasData.nodes.push(node);
+						CanvasTimelineData.nodes.push(node as CanvasTextData);
 						x += spacing; // Move next node to the right
 					};
 
@@ -79,20 +67,20 @@ export default class TimelineCanvasPlugin extends Plugin {
 					const filePath = fileName; // You can change the folder name
 
 					// Create the canvas file
-					this.app.vault.create(filePath, JSON.stringify(canvasData, null, 2));
+					this.app.vault.create(filePath, JSON.stringify(CanvasTimelineData, null, 2));
 
-					// Open the new canvas in a new tab
+					// Open the new Canvas in a new tab
 					// const file = this.app.vault.getAbstractFileByPath(filePath);
 					// if (file && file instanceof TFile) {
 					// 	this.app.workspace.getLeaf(true).openFile(file);
 					// }
 
-					const fileContent = JSON.stringify(canvasData, null, 2);
+					const fileContent = JSON.stringify(CanvasTimelineData, null, 2);
 
 					this.app.vault.create(filePath, fileContent).then((file) => {
 						this.app.workspace.getLeaf(true).openFile(file);
 					}).catch((error) => {
-						console.error("Failed to create canvas file:", error);
+						console.error("Failed to create Canvas file:", error);
 					});
 				}).open();
 			}
@@ -155,7 +143,7 @@ export default class TimelineCanvasPlugin extends Plugin {
 class CreateTimelineModal extends Modal {
 	constructor(app: App, onSubmit: (startYear: number, endYear: number, interval: number) => void) {
 		super(app);
-			this.setTitle('Create a timeline canvas');
+			this.setTitle('Create a timeline Canvas');
 
 			let startYear = '';
 			let endYear = '';

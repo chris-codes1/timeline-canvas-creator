@@ -1,6 +1,6 @@
 # Timeline Canvas Creator
 
-Quickly create timeline structured canvases in Obsidian, without having to individually place cards yourself.
+A plugin for https://obsidian.md/ that lets you quickly create timeline structured canvases, without having to individually place cards yourself.
 
 # How to use this plugin:
 

@@ -8,3 +8,5 @@ A plugin for https://obsidian.md/ that lets you quickly create timeline structur
 2. Run the 'Create timeline canvas' command
 3. Enter the desired start date, end date, and interval of the timeline
 4. Click submit
+
+**Have an idea for the plugin?** Join my Discord and suggest it: https://discord.gg/URdPbX8Ery
